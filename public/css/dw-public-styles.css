@@ -1,0 +1,51 @@
+/* map container */
+.dw-custom-google-map {
+	float: left;
+	width: 100%;
+}
+.dw-google-container {
+	background-color: #e7eaf0;
+	height: 500px;
+	position: relative;
+	width: 100%;
+}
+
+/* custom zoom controls */
+.dw-zoom-in, 
+.dw-zoom-out {
+	background-color: #a8ce3b;
+	border: 0;
+	border-radius: 2px;
+	color: #fff;
+	cursor: pointer;
+	display: block;
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	height: 32px;
+	margin: 2px 10px;
+	padding: 0;
+	width: 32px;
+	-webkit-transition: background .3s ease-in-out;
+  		transition: background .3s ease-in-out;
+}
+.dw-zoom-in {
+	margin-top: 10px;
+}
+.dw-zoom-in:hover, 
+.dw-zoom-out:hover {
+	background: #333;
+}
+.no-touch .dw-zoom-in:hover, 
+.no-touch .dw-zoom-out:hover {
+	background-color: #a8ce3b;
+}
+
+/* address */
+.dw-address {
+	background: #6fd000;
+	color: #fff;
+	font-size: 12px;
+	padding: 1em;
+	text-align: center;
+}

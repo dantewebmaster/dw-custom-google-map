@@ -1,0 +1,11 @@
+/**
+ * The plugin admin styles 
+ */
+.dw-cf7-alerts-settings-page .card {
+	max-width: 600px;
+}
+
+.option-custom-css textarea {
+	font-family: consolas, "courier new", sans-serif;
+	font-size: 12px;
+}
