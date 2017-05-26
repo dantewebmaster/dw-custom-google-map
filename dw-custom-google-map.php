@@ -56,21 +56,26 @@ function dw_custom_google_map_shortcode() {
 	// get all plugin settings
 	$options = get_option( 'dw_custom_google_map_settings' );
 
-	$address       = 'Avenida Eudes Scherrer Souza, nº 1.025, Sala 602 Centro Empresarial da Serra, Pq. Residencial de Laranjeiras. Serra - Espírito Santo - Brasil / CEP 29166-865';
+	$activate_address = $options['dw_custom_google_map_activate_address'];
+	$address          = $options['dw_custom_google_map_address'];
+
 	$latitude      = '-20.195007';
 	$longitude     = '-40.254891';
 	$map_zoom      = 15;
 	$custom_marker = esc_url( 'http://victa.nambbu.com.br/wp-content/uploads/2017/05/map-marker-victa.png' );
-	$main_color    = '#a8ce3b';
+	$main_color    = $options['dw_custom_google_map_main_color'];
 	$saturation    = 0;
 	$brightness    = 0;
 
-	echo '<section id="dw-custom-google-map" class="dw-custom-google-map" data-latitude="'. $latitude .'" data-longitude="'. $longitude .'" data-zoom="'. $map_zoom .'" data-custom-marker="'. $custom_marker .'" data-main-color="'. $main_color .'" data-saturation="'. $saturation .'" data-brightness="'. $brightness .'">
-			<div id="dw-google-container" class="dw-google-container"></div>
-			<button id="dw-zoom-in" class="dw-zoom-in">&plus;</button>
-			<button id="dw-zoom-out" class="dw-zoom-out">&minus;</button>
-			<address class="dw-address">'. $address .'</address>
-		  </section>';
+	echo '<section id="dw-custom-google-map" class="dw-custom-google-map" data-latitude="'. $latitude .'" data-longitude="'. $longitude .'" data-zoom="'. $map_zoom .'" data-custom-marker="'. $custom_marker .'" data-main-color="'. $main_color .'" data-saturation="'. $saturation .'" data-brightness="'. $brightness .'">';
+
+	echo '<div id="dw-google-container" class="dw-google-container"></div><button id="dw-zoom-in" class="dw-zoom-in">&plus;</button><button id="dw-zoom-out" class="dw-zoom-out">&minus;</button>';
+
+	if ( $activate_address && $address ) {
+		echo '<address class="dw-address">'. $address .'</address>';
+	}
+
+	echo '</section>';
 
 }
 add_shortcode( 'dw-custom-google-map', 'dw_custom_google_map_shortcode' );

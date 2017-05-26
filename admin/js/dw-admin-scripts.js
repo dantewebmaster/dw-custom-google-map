@@ -1,18 +1,25 @@
+/**
+ * The plugin admin sscripts 
+ */
 jQuery(document).ready(function ($) {
 
-	var alert_type_input = $(".alert-type-input:checked");
-	var toast_position_settings = $(".option-toast-position");
-	
-	if ( alert_type_input.val() == 'modal' ) {
-		toast_position_settings.hide();
+	/* Show/hide the address textarea */
+	if ($("#activate-address").prop('checked')) {
+		$(".option-address").show();
+	} else {
+		$(".option-address").hide();
 	}
-
-	$(".alert-type-input").bind("change", function () {
-		if ( $(this).val() == 'modal' ) {
-			toast_position_settings.hide();
-		} else if( $(this).val() == 'toast' ) {
-			toast_position_settings.show();
+	$("#activate-address").bind("change", function () {
+		if ($(this).prop('checked')) {
+			$(".option-address").show();
+		} else {
+			$(".option-address").hide();
 		}
 	});
+
+	/* Add Color Picker to all inputs that have 'color-field' class */
+    $(function() {
+        $('.dw-color-picker').wpColorPicker();
+    });
 
 });

@@ -11,10 +11,12 @@ if ( ! defined( 'WPINC' ) ) {
 function dw_custom_google_map_admin_scripts() {
 
 	if ( is_admin() ) {
-		wp_enqueue_style( 'dw-custom-google-map-admin-styles', plugin_dir_url( __FILE__ ) . 'admin/css/dw-admin-styles.css', array(), '1.0', 'all' );
-	}
+		wp_enqueue_style( 'dw-custom-google-map-admin-styles', plugin_dir_url( __FILE__ ) . 'css/dw-admin-styles.css', array(), '1.0', 'all' );
+		// Add the color picker css file       
+        wp_enqueue_style( 'wp-color-picker' );
 
-	wp_enqueue_script( 'dw-custom-google-map-admin-scripts', plugin_dir_url( __FILE__ ) . 'admin/js/dw-admin-scripts.js', array( 'jquery' ), '1.0', true );
+		wp_enqueue_script( 'dw-custom-google-map-admin-scripts', plugin_dir_url( __FILE__ ) . 'js/dw-admin-scripts.js', array( 'jquery', 'wp-color-picker' ), '1.0', true );
+	}
 
 }
 add_action( 'admin_enqueue_scripts', 'dw_custom_google_map_admin_scripts' );
@@ -42,49 +44,39 @@ function dw_custom_google_map_settings_init() {
 	// Generate the settings section
 	add_settings_section(
 		'dw_custom_google_map_settings_group_section', 
-		__( 'DW CF7 Alerts Display Settings', 'dw-custom-google-map' ), 
+		__( 'DW Custom Google Map Display Settings', 'dw-custom-google-map' ), 
 		'dw_custom_google_map_settings_section_callback', 
 		'dw_custom_google_map_settings_group'
 	);
 
-	// Checkbox to activat/deactivate the plugin 
+	// Checkbox to activate/deactivate the address box 
 	add_settings_field( 
-		'dw_custom_google_map_activate', 
-		__( 'Activate the Custom Alerts', 'dw-custom-google-map' ), 
-		'dw_custom_google_map_activate_render', 
+		'dw_custom_google_map_activate_address', 
+		__( 'Activate the Address Box', 'dw-custom-google-map' ), 
+		'dw_custom_google_map_activate_address_render', 
 		'dw_custom_google_map_settings_group', 
 		'dw_custom_google_map_settings_group_section',
-		array( 'class' => 'option-activate' )
+		array( 'class' => 'option-activate-address' )
 	);
 
-	// Alert type radio option
+	// Textarea for address
 	add_settings_field( 
-		'dw_custom_google_map_alert_type', 
-		__( 'Set the Type of Alerts', 'dw-custom-google-map' ), 
-		'dw_custom_google_map_alert_type_render', 
+		'dw_custom_google_map_address', 
+		__( 'Map Address', 'dw-custom-google-map' ), 
+		'dw_custom_google_map_address_render', 
 		'dw_custom_google_map_settings_group', 
 		'dw_custom_google_map_settings_group_section',
-		array( 'class' => 'option-alert-type' )
-	);
-	
-	// The position of toast alert
-	add_settings_field( 
-		'dw_custom_google_map_alert_position', 
-		__( 'Toast Alerts Position', 'dw-custom-google-map' ), 
-		'dw_custom_google_map_alert_position_render', 
-		'dw_custom_google_map_settings_group', 
-		'dw_custom_google_map_settings_group_section',
-		array( 'class' => 'option-toast-position' )
+		array( 'class' => 'option-address' )
 	);
 
-	// Textarea for custom CSS
+	// Option to set map main color 
 	add_settings_field( 
-		'dw_custom_google_map_custom_css', 
-		__( 'Custom CSS', 'dw-custom-google-map' ), 
-		'dw_custom_google_map_custom_css_render', 
+		'dw_custom_google_map_main_color', 
+		__( 'Map Main Color', 'dw-custom-google-map' ), 
+		'dw_custom_google_map_main_color_render', 
 		'dw_custom_google_map_settings_group', 
 		'dw_custom_google_map_settings_group_section',
-		array( 'class' => 'option-custom-css' )
+		array( 'class' => 'option-main-color' )
 	);
 }
 add_action( 'admin_init', 'dw_custom_google_map_settings_init' );
@@ -94,69 +86,49 @@ add_action( 'admin_init', 'dw_custom_google_map_settings_init' );
  */
 function dw_custom_google_map_settings_section_callback() { 
 
-	echo __( 'Configure the display options of the Contact Form 7 custom response output alerts.', 'dw-custom-google-map' );
+	echo __( 'Configure the display options of the Custom Google Map.', 'dw-custom-google-map' );
 
 }
 
 /**
  * Render the settings fields HTML.
  */
-// Setting to activate the plugin render
-function dw_custom_google_map_activate_render() { 
+// Setting to activate the address box render
+function dw_custom_google_map_activate_address_render() { 
 
 	$options = get_option( 'dw_custom_google_map_settings' );
 
+	$val = ( isset( $options['dw_custom_google_map_activate_address'] ) ? $options['dw_custom_google_map_activate_address'] : '' );	
+
 	?>
 	<label>
-		<input type="checkbox" name="dw_custom_google_map_settings[dw_custom_google_map_activate]" value="1" <?php checked( $options['dw_custom_google_map_activate'], 1 ); ?> />
-		<p><em><small><?php _e( 'Uncheck to disable the custom alerts.', 'dw-custom-google-map' ); ?><small></em></p>
+		<input id="activate-address" type="checkbox" name="dw_custom_google_map_settings[dw_custom_google_map_activate_address]" value="1" <?php checked( $val, 1 ); ?> />
+		<p><em><small><?php _e( 'Check to show the address box on the map.', 'dw-custom-google-map' ); ?><small></em></p>
 	</label>
 	<?php
 }
 
-// Alert type setting render
-function dw_custom_google_map_alert_type_render() { 
+// Address setting render
+function dw_custom_google_map_address_render() { 
 
 	$options = get_option( 'dw_custom_google_map_settings' );
 
 	?>
-	<label>
-		<input class="alert-type-input" type="radio" name="dw_custom_google_map_settings[dw_custom_google_map_alert_type]" value="toast" <?php checked( $options['dw_custom_google_map_alert_type'], 'toast' ); ?> />
-		Toast
-	</label>
-	<br />
-	<label>
-		<input class="alert-type-input" type="radio" name="dw_custom_google_map_settings[dw_custom_google_map_alert_type]" value="modal" <?php checked( $options['dw_custom_google_map_alert_type'], 'modal' ); ?> />
-		Modal
-	</label>
-	<p><em><small><?php _e( 'Select the style of alerts, toast or modal.', 'dw-custom-google-map' ); ?><small></em></p>
+	<textarea name="dw_custom_google_map_settings[dw_custom_google_map_address]" cols="50" rows="4"><?php echo wp_strip_all_tags( $options['dw_custom_google_map_address'] ); ?></textarea>
+	<p><em><small><?php _e( 'Insert the address for the map here.', 'dw-custom-google-map' ); ?><small></em></p>
 	<?php
 }
 
-// Alert position setting render
-function dw_custom_google_map_alert_position_render() { 
-
-	$options = get_option( 'dw_custom_google_map_settings' );
-	?>
-	<select name="dw_custom_google_map_settings[dw_custom_google_map_alert_position]">
-		<option value="bottom_right" <?php selected( $options['dw_custom_google_map_alert_position'], 'bottom_right' ); ?>><?php _e( 'Bottom Right', 'dw-custom-google-map' ); ?></option>
-		<option value="bottom_left" <?php selected( $options['dw_custom_google_map_alert_position'], 'bottom_left' ); ?>><?php _e( 'Bottom Left', 'dw-custom-google-map' ); ?></option>
-		<option value="top_right" <?php selected( $options['dw_custom_google_map_alert_position'], 'top_right' ); ?>><?php _e( 'Top Right', 'dw-custom-google-map' ); ?></option>
-		<option value="top_left" <?php selected( $options['dw_custom_google_map_alert_position'], 'top_left' ); ?>><?php _e( 'Top Left', 'dw-custom-google-map' ); ?></option>
-	</select>
-	<p><em><small><?php _e( 'Select the position of the alerts on the screen.', 'dw-custom-google-map' ); ?></small></em></p>
-	<?php
-
-}
-
-// Custom CSS setting render
-function dw_custom_google_map_custom_css_render() { 
+// Main color setting render
+function dw_custom_google_map_main_color_render() { 
 
 	$options = get_option( 'dw_custom_google_map_settings' );
 
+	$val = ( isset( $options['dw_custom_google_map_main_color'] ) ? $options['dw_custom_google_map_main_color'] : '' );
+
 	?>
-	<textarea name="dw_custom_google_map_settings[dw_custom_google_map_custom_css]" cols="48" rows="8"><?php echo wp_strip_all_tags( $options['dw_custom_google_map_custom_css'] ); ?></textarea>
-	<p><em><small><?php _e( 'Write custom CSS for the plugin here.', 'dw-custom-google-map' ); ?><small></em></p>
+	<input class="dw-color-picker" name="dw_custom_google_map_settings[dw_custom_google_map_main_color]" type="text" value="<?php echo $val; ?>" />
+	<p><em><small><?php _e( 'Set the custom map main color.', 'dw-custom-google-map' ); ?><small></em></p>
 	<?php
 }
 
@@ -167,15 +139,6 @@ function dw_custom_google_map_settings_page() {
 ?>
 
 	<div class="wrap dw-custom-google-map-settings-page">
-
-		<?php 
-		// add error/update messages
-		if ( isset( $_GET['settings-updated'] ) ) {
-			add_settings_error( 'dw_custom_google_map_messages', 'dw_custom_google_map_message', __( 'Settings saved.' ), 'updated' );
-		}
-		settings_errors( 'dw_custom_google_map_messages' );
-		?>
-
 		<h1><?php echo get_admin_page_title(); ?></h1>
 		<div class="card left">
 			<form method="post" action="options.php">
@@ -197,27 +160,61 @@ function dw_custom_google_map_settings_page() {
  * Sanitize the settings input
  */
 function dw_custom_google_map_validate_settings( $input ) {
+
+	$options = get_option( 'dw_custom_google_map_settings' );
 	
 	// Create our array for storing the validated options
 	$output = array();
+	
+	// Validate checkbox
+	$activate_address = trim( $input['dw_custom_google_map_activate_address'] );
+	$output['dw_custom_google_map_activate_address'] = dw_sanitize_checkbox( $activate_address );
 
-	// Loop through each of the incoming options
-	foreach ( $input as $key => $value ) {
-		
-		// Check to see if the current option has a value. If so, process it.
-		if ( isset( $input[$key] ) ) {
-		
-			// Strip all HTML and PHP tags and properly handle quoted strings
-			$output[$key] = wp_strip_all_tags( $input[ $key ] );
-			
-		}
-		
-	}
+	// Validate address field
+    $address = trim( $input['dw_custom_google_map_address'] );
+    $output['dw_custom_google_map_address'] = wp_strip_all_tags( $address );
+
+	// Validate color picker
+	$main_color = trim( $input['dw_custom_google_map_main_color'] );
+	$main_color = strip_tags( stripslashes( $main_color ) );
+    // Check if is a valid hex color and display error if false
+    if ( false === dw_check_color( $main_color ) ) {
+        // Set the error message
+		add_settings_error( 'dw_custom_google_map_settings', 'dw_color_error', 'Insert a valid color', 'error' );
+         
+        // Get the previous valid value
+        $output['dw_custom_google_map_main_color'] = $options['dw_custom_google_map_main_color'];
+    } else {
+        $output['dw_custom_google_map_main_color'] = $main_color;
+    }
 
 	// Return the array processing any additional functions filtered by this action
 	return apply_filters( 'dw_custom_google_map_validate_settings', $output, $input );
 
 }
+/**
+ * Check if value is a valid HEX color.
+ */
+function dw_check_color( $color ) { 
+     
+    if ( preg_match( '/^#[a-f0-9]{6}$/i', $color ) ) {    
+        return true;
+    }
+     
+    return false;
+}
+/**
+ * Sanitize checkboxes.
+ */
+function dw_sanitize_checkbox( $input ) {
+	if ( $input == 1 ) {
+		return 1;
+	} else {
+		return '';
+	}
+}
+
+
 
 /**
  * Adds an action link to settings page on the plugins list.
