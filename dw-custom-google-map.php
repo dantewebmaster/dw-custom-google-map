@@ -62,8 +62,8 @@ function dw_custom_google_map_shortcode() {
 	$latitude      = '-20.195007';
 	$longitude     = '-40.254891';
 	$map_zoom      = 15;
-	$custom_marker = esc_url( 'http://victa.nambbu.com.br/wp-content/uploads/2017/05/map-marker-victa.png' );
-	$main_color    = $options['dw_custom_google_map_main_color'];
+	$custom_marker = esc_url( $options['dw_custom_google_map_custom_marker'] );
+	$main_color    = esc_html( $options['dw_custom_google_map_main_color'] );
 	$saturation    = 0;
 	$brightness    = 0;
 
@@ -83,4 +83,4 @@ add_shortcode( 'dw-custom-google-map', 'dw_custom_google_map_shortcode' );
 /**
  * Create options page on admin.
  */
-include "admin/dw-settings-page.php";
+require "admin/dw-settings-page.php";
