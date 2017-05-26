@@ -37,9 +37,21 @@ add_action( 'plugins_loaded', 'dw_custom_google_map_load_textdomain' );
 function dw_custom_google_map_public_scripts() {
 	// google maps api key
 	$api_key =  'AIzaSyD4pK30HoIhAond9uN-fJejBfg4ZIKXWfY';
-
+	
 	// renqueue styles
 	wp_enqueue_style( 'dw-custom-google-map-public-styles', plugin_dir_url( __FILE__ ) . 'public/css/dw-public-styles.css' );
+	
+	// add custom css
+	$options = get_option( 'dw_custom_google_map_settings' );
+	$main_color = esc_html( $options['dw_custom_google_map_main_color'] );
+	$inline_css = "
+		.main-color {
+			background: $main_color;
+		}
+	";
+	if ( $main_color ) {
+		wp_add_inline_style( 'dw-custom-google-map-public-styles', $inline_css );
+	}
 	
 	// enqueue the scripts
 	wp_enqueue_script( 'dw-google-maps-api', "https://maps.googleapis.com/maps/api/js?key=$api_key", array(), false, true );
@@ -69,10 +81,10 @@ function dw_custom_google_map_shortcode() {
 
 	echo '<section id="dw-custom-google-map" class="dw-custom-google-map" data-latitude="'. $latitude .'" data-longitude="'. $longitude .'" data-zoom="'. $map_zoom .'" data-custom-marker="'. $custom_marker .'" data-main-color="'. $main_color .'" data-saturation="'. $saturation .'" data-brightness="'. $brightness .'">';
 
-	echo '<div id="dw-google-container" class="dw-google-container"></div><button id="dw-zoom-in" class="dw-zoom-in">&plus;</button><button id="dw-zoom-out" class="dw-zoom-out">&minus;</button>';
+	echo '<div id="dw-google-container" class="dw-google-container"></div><button id="dw-zoom-in" class="dw-zoom-in main-color">&plus;</button><button id="dw-zoom-out" class="dw-zoom-out main-color">&minus;</button>';
 
 	if ( $activate_address && $address ) {
-		echo '<address class="dw-address">'. $address .'</address>';
+		echo '<address class="dw-address main-color">'. $address .'</address>';
 	}
 
 	echo '</section>';

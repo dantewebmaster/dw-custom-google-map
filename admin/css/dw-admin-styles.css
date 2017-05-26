@@ -5,6 +5,12 @@
 	max-width: 600px;
 }
 
+.option-custom-marker img {
+	border: 1px solid #d7d7d7;
+	float: right;
+	padding: 5px;
+}
+
 .option-custom-css textarea {
 	font-family: consolas, "courier new", sans-serif;
 	font-size: 12px;
