@@ -16,6 +16,26 @@ function dw_custom_google_map_settings_init() {
 		'dw_custom_google_map_settings_group'
 	);
 
+	// Map address latitude 
+	add_settings_field( 
+		'dw_custom_google_map_latitude', 
+		__( 'Map Address Latitude', 'dw-custom-google-map' ), 
+		'dw_custom_google_map_latitude_render', 
+		'dw_custom_google_map_settings_group', 
+		'dw_custom_google_map_settings_group_section',
+		array( 'class' => 'option-latitude' )
+	);
+
+	// Map address longitude 
+	add_settings_field( 
+		'dw_custom_google_map_longitude', 
+		__( 'Map Address Longitude', 'dw-custom-google-map' ), 
+		'dw_custom_google_map_longitude_render', 
+		'dw_custom_google_map_settings_group', 
+		'dw_custom_google_map_settings_group_section',
+		array( 'class' => 'option-longitude' )
+	);
+
 	// Checkbox to activate/deactivate the address box 
 	add_settings_field( 
 		'dw_custom_google_map_activate_address', 

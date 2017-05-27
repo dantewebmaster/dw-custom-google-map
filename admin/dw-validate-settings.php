@@ -1,11 +1,22 @@
 <?php
+/**
+ * Validate all settings inputs and output if valid.
+ */
 function dw_custom_google_map_validate_settings( $input ) {
 
 	$options = get_option( 'dw_custom_google_map_settings' );
 	
 	// Create our array for storing the validated options
 	$output = array();
+
+	// Validate latitude field
+    $latitude = trim( $input['dw_custom_google_map_latitude'] );
+    $output['dw_custom_google_map_latitude'] = wp_strip_all_tags( $latitude );
 	
+	// Validate longitude field
+    $longitude = trim( $input['dw_custom_google_map_longitude'] );
+    $output['dw_custom_google_map_longitude'] = wp_strip_all_tags( $longitude );
+
 	// Validate checkbox
 	$activate_address = trim( $input['dw_custom_google_map_activate_address'] );
 	$output['dw_custom_google_map_activate_address'] = dw_sanitize_checkbox( $activate_address );

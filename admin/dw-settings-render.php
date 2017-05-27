@@ -6,14 +6,26 @@ function dw_custom_google_map_settings_section_callback() {
 }
 
 // Map latitude setting render
-function dw_custom_google_map_latitude() { 
+function dw_custom_google_map_latitude_render() { 
 
 	$options = get_option( 'dw_custom_google_map_settings' );
 	$val = ( isset( $options['dw_custom_google_map_latitude'] ) ? $options['dw_custom_google_map_latitude'] : '' );
 
 	?>
-	<input name="dw_custom_google_map_settings[dw_custom_google_map_main_color]" type="text" value="<?php echo $val; ?>" />
-	<p><em><small><?php _e( 'Set the custom map main color.', 'dw-custom-google-map' ); ?><small></em></p>
+	<input class="regular-text" name="dw_custom_google_map_settings[dw_custom_google_map_latitude]" type="text" value="<?php echo $val; ?>" placeholder="<?php _e( 'Address latitude, e.g: -12.345678', 'dw-custom-google-map' ) ?>" />
+	<p><em><small><?php _e( 'Place the address latitude here.', 'dw-custom-google-map' ); ?><small></em></p>
+	<?php
+}
+
+// Map longitude setting render
+function dw_custom_google_map_longitude_render() { 
+
+	$options = get_option( 'dw_custom_google_map_settings' );
+	$val = ( isset( $options['dw_custom_google_map_longitude'] ) ? $options['dw_custom_google_map_longitude'] : '' );
+
+	?>
+	<input class="regular-text" name="dw_custom_google_map_settings[dw_custom_google_map_longitude]" type="text" value="<?php echo $val; ?>" placeholder="<?php _e( 'Address longitude, e.g: -87.654321', 'dw-custom-google-map' ) ?>" />
+	<p><em><small><?php _e( 'Place the address longitude here.', 'dw-custom-google-map' ); ?><small></em></p>
 	<?php
 }
 
@@ -38,7 +50,7 @@ function dw_custom_google_map_address_render() {
 	$val = ( isset( $options['dw_custom_google_map_address'] ) ? $options['dw_custom_google_map_address'] : '' );
 
 	?>
-	<textarea name="dw_custom_google_map_settings[dw_custom_google_map_address]" cols="50" rows="4" placeholder="<?php _e( 'Map address', 'dw-custom-google-map' ); ?>"><?php echo wp_strip_all_tags( $val ); ?></textarea>
+	<textarea name="dw_custom_google_map_settings[dw_custom_google_map_address]" cols="50" rows="4" placeholder="<?php _e( 'Map complete address', 'dw-custom-google-map' ); ?>"><?php echo wp_strip_all_tags( $val ); ?></textarea>
 	<p><em><small><?php _e( 'Insert the address for the map here.', 'dw-custom-google-map' ); ?><small></em></p>
 	<?php
 }
@@ -62,7 +74,7 @@ function dw_custom_google_map_custom_marker_render() {
 	$val = ( isset( $options['dw_custom_google_map_custom_marker'] ) ? $options['dw_custom_google_map_custom_marker'] : '' );
 
 	?>
-    <input id="custom-marker-url" type="text" name="dw_custom_google_map_settings[dw_custom_google_map_custom_marker]" value="<?php echo $val; ?>" placeholder="<?php _e( 'Image url', 'dw-custom-google-map' ); ?>" />
+    <input id="custom-marker-url" type="text" name="dw_custom_google_map_settings[dw_custom_google_map_custom_marker]" value="<?php echo $val; ?>" placeholder="<?php _e( 'Marker image url', 'dw-custom-google-map' ); ?>" />
 
     <input type="button" name="dw_custom_google_map_settings[dw_custom_google_map_custom_marker]" id="upload-custom-marker" class="button-secondary" value="<?php _e( 'Upload Marker', 'dw-custom-google-map' ); ?>" />
 	

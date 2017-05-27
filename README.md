@@ -4,8 +4,10 @@ Plugin criado para dar a possibilidade de usuários comuns poderem criar um mapa
 
 ---
 
+#### Overview
+* Campos para latitude e longitude inseridos no admin.
+
 #### To Do
-* Criar uma condição que oculta opções, dependendo de outra. **✓**
 * Criar uma imagem para por ao lado das opções.
 * Criar 2 screeshots.
 * Organizar e splitar o código.
@@ -15,5 +17,5 @@ Plugin criado para dar a possibilidade de usuários comuns poderem criar um mapa
 ---
 
 #### Changelog
-##### 1.0 - 26/05/2017
+##### v1.0 - 26/05/2017
 * Initial Version

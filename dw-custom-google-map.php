@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DW Custom Google Map
  * Plugin URI: https://dantewebmaster.com/plugins/dw-custom-google-map
- * Description:
+ * Description: With the Custom Google Map plugin you can create a better customized map with color, saturation, brightness, custom map marker, zoom and more.
  * Version: 1.0
  * Author: Dante Webmaster
  * Author URI: https://dantewebmaster.com/
@@ -71,9 +71,9 @@ function dw_custom_google_map_shortcode() {
 	$activate_address = $options['dw_custom_google_map_activate_address'];
 	$address          = $options['dw_custom_google_map_address'];
 
-	$latitude      = '-20.195007';
-	$longitude     = '-40.254891';
-	$map_zoom      = 15;
+	$latitude      = wp_strip_all_tags( $options['dw_custom_google_map_latitude'] );
+	$longitude     = wp_strip_all_tags( $options['dw_custom_google_map_longitude'] );
+	$map_zoom      = 16;
 	$custom_marker = esc_url( $options['dw_custom_google_map_custom_marker'] );
 	$main_color    = esc_html( $options['dw_custom_google_map_main_color'] );
 	$saturation    = 0;
