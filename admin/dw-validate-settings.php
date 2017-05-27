@@ -1,9 +1,14 @@
 <?php
+// If this file is called directly, abort
+if ( ! defined( 'WPINC' ) ) {
+	die;
+}
+
 /**
  * Validate all settings inputs and output if valid.
  */
 function dw_custom_google_map_validate_settings( $input ) {
-
+	// Get all plugin saved settings
 	$options = get_option( 'dw_custom_google_map_settings' );
 	
 	// Create our array for storing the validated options

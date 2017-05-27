@@ -1,8 +1,7 @@
 /**
- * The plugin admin sscripts 
+ * The plugin admin sscripts.
  */
 jQuery(document).ready(function ($) {
-
 	/* Show/hide the address textarea */
 	if ($("#activate-address").prop('checked')) {
 		$(".option-address").show();

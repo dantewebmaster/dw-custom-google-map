@@ -12,7 +12,7 @@ Give a better style for your company Google map.
 
 == Description ==
 
-With the Custom Google Map plugin you can create a better customized map with color, saturation, brightness, custom map marker, zoom and more.
+With the Custom Google Map plugin you can create a better customized and clean map with color, saturation, brightness, custom map marker, zoom and more.
 
 
 == Installation ==
@@ -21,7 +21,7 @@ Extract the zip file and just drop the contents in the **wp-content/plugins/** d
 
 == Screenshots ==
 
-1. Custom google map demonstration on front-end.
+1. Customized Google Maps demonstration maps.
 
 == Changelog ==
 

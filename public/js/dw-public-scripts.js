@@ -1,5 +1,7 @@
-jQuery(document).ready(function($){
-	
+/**
+ * The plugin public scripts.
+ */
+jQuery(document).ready(function ($) {
 	/* stops if map does not exists */
 	var $map_exist = $('#dw-custom-google-map').length;
 	if (!$map_exist) return;

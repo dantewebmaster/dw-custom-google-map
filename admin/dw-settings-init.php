@@ -1,6 +1,13 @@
 <?php
-function dw_custom_google_map_settings_init() {
+// If this file is called directly, abort
+if ( ! defined( 'WPINC' ) ) {
+	die;
+}
 
+/**
+ * Initialize the settings fields using WP Settings API.
+ */
+function dw_custom_google_map_settings_init() {
 	// Register the settings group
 	register_setting( 
 		'dw_custom_google_map_settings_group', 
