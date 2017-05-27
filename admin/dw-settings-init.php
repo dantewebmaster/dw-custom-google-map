@@ -36,6 +36,16 @@ function dw_custom_google_map_settings_init() {
 		array( 'class' => 'option-longitude' )
 	);
 
+	// Option to set map zoom level 
+	add_settings_field( 
+		'dw_custom_google_map_zoom',
+		__( 'Map Zoom Level', 'dw-custom-google-map' ), 
+		'dw_custom_google_map_zoom_render', 
+		'dw_custom_google_map_settings_group', 
+		'dw_custom_google_map_settings_group_section',
+		array( 'class' => 'option-zoom' )
+	);
+
 	// Checkbox to activate/deactivate the address box 
 	add_settings_field( 
 		'dw_custom_google_map_activate_address', 
@@ -64,6 +74,26 @@ function dw_custom_google_map_settings_init() {
 		'dw_custom_google_map_settings_group', 
 		'dw_custom_google_map_settings_group_section',
 		array( 'class' => 'option-main-color' )
+	);
+
+	// Option to set map main color saturation 
+	add_settings_field( 
+		'dw_custom_google_map_saturation',
+		__( 'Main Color Saturation', 'dw-custom-google-map' ), 
+		'dw_custom_google_map_saturation_render', 
+		'dw_custom_google_map_settings_group', 
+		'dw_custom_google_map_settings_group_section',
+		array( 'class' => 'option-saturation' )
+	);
+
+	// Option to set map main color brightness 
+	add_settings_field( 
+		'dw_custom_google_map_brightness',
+		__( 'Main Color Brightness', 'dw-custom-google-map' ), 
+		'dw_custom_google_map_brightness_render', 
+		'dw_custom_google_map_settings_group', 
+		'dw_custom_google_map_settings_group_section',
+		array( 'class' => 'option-brightness' )
 	);
 
 	// Media uploader to send custom marker 

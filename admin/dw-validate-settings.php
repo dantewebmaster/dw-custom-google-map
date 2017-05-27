@@ -17,13 +17,17 @@ function dw_custom_google_map_validate_settings( $input ) {
     $longitude = trim( $input['dw_custom_google_map_longitude'] );
     $output['dw_custom_google_map_longitude'] = wp_strip_all_tags( $longitude );
 
+	// Validate map zoom level field
+    $zoom_level = trim( $input['dw_custom_google_map_zoom'] );
+    $output['dw_custom_google_map_zoom'] = intval( $zoom_level );
+
 	// Validate checkbox
 	$activate_address = trim( $input['dw_custom_google_map_activate_address'] );
 	$output['dw_custom_google_map_activate_address'] = dw_sanitize_checkbox( $activate_address );
 
 	// Validate address field
     $address = trim( $input['dw_custom_google_map_address'] );
-    $output['dw_custom_google_map_address'] = wp_strip_all_tags( $address );
+    $output['dw_custom_google_map_address'] = esc_textarea( $address );
 
 	// Validate color picker
 	$main_color = trim( $input['dw_custom_google_map_main_color'] );
@@ -38,6 +42,14 @@ function dw_custom_google_map_validate_settings( $input ) {
     } else {
         $output['dw_custom_google_map_main_color'] = $main_color;
     }
+
+	// Validate main color saturation field
+    $saturation = trim( $input['dw_custom_google_map_saturation'] );
+    $output['dw_custom_google_map_saturation'] = intval( $saturation );
+
+	// Validate main color brightness field
+    $brightness = trim( $input['dw_custom_google_map_brightness'] );
+    $output['dw_custom_google_map_brightness'] = intval( $brightness );
 
 	// Validate custom marker url
     $custom_marker = trim( $input['dw_custom_google_map_custom_marker'] );

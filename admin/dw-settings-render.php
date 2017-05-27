@@ -29,6 +29,18 @@ function dw_custom_google_map_longitude_render() {
 	<?php
 }
 
+// Map zoom level setting render
+function dw_custom_google_map_zoom_render() { 
+
+	$options = get_option( 'dw_custom_google_map_settings' );
+	$val = ( isset( $options['dw_custom_google_map_zoom'] ) ? $options['dw_custom_google_map_zoom'] : 15 );
+
+	?>
+	<input name="dw_custom_google_map_settings[dw_custom_google_map_zoom]" type="number" min="3" max="22" step="1" value="<?php echo intval( $val ); ?>" />
+	<p><em><small><?php _e( 'Set the zoom level for the map.', 'dw-custom-google-map' ); ?><small></em></p>
+	<?php
+}
+
 // Setting to activate the address box render
 function dw_custom_google_map_activate_address_render() { 
 
@@ -50,7 +62,7 @@ function dw_custom_google_map_address_render() {
 	$val = ( isset( $options['dw_custom_google_map_address'] ) ? $options['dw_custom_google_map_address'] : '' );
 
 	?>
-	<textarea name="dw_custom_google_map_settings[dw_custom_google_map_address]" cols="50" rows="4" placeholder="<?php _e( 'Map complete address', 'dw-custom-google-map' ); ?>"><?php echo wp_strip_all_tags( $val ); ?></textarea>
+	<textarea name="dw_custom_google_map_settings[dw_custom_google_map_address]" cols="50" rows="2" placeholder="<?php _e( 'Map complete address', 'dw-custom-google-map' ); ?>"><?php echo esc_textarea( $val ); ?></textarea>
 	<p><em><small><?php _e( 'Insert the address for the map here.', 'dw-custom-google-map' ); ?><small></em></p>
 	<?php
 }
@@ -62,8 +74,32 @@ function dw_custom_google_map_main_color_render() {
 	$val = ( isset( $options['dw_custom_google_map_main_color'] ) ? $options['dw_custom_google_map_main_color'] : '' );
 
 	?>
-	<input class="dw-color-picker" name="dw_custom_google_map_settings[dw_custom_google_map_main_color]" type="text" value="<?php echo $val; ?>" />
+	<input class="dw-color-picker" name="dw_custom_google_map_settings[dw_custom_google_map_main_color]" type="text" value="<?php echo esc_html( $val ); ?>" />
 	<p><em><small><?php _e( 'Set the custom map main color.', 'dw-custom-google-map' ); ?><small></em></p>
+	<?php
+}
+
+// Main color saturation setting render
+function dw_custom_google_map_saturation_render() { 
+
+	$options = get_option( 'dw_custom_google_map_settings' );
+	$val = ( isset( $options['dw_custom_google_map_saturation'] ) ? $options['dw_custom_google_map_saturation'] : 0 );
+
+	?>
+	<input name="dw_custom_google_map_settings[dw_custom_google_map_saturation]" type="number" min="-100" max="100" step="1" value="<?php echo intval( $val ); ?>" />
+	<p><em><small><?php _e( 'Set the saturation for the main color.', 'dw-custom-google-map' ); ?><small></em></p>
+	<?php
+}
+
+// Main color brightness setting render
+function dw_custom_google_map_brightness_render() { 
+
+	$options = get_option( 'dw_custom_google_map_settings' );
+	$val = ( isset( $options['dw_custom_google_map_brightness'] ) ? $options['dw_custom_google_map_brightness'] : 0 );
+
+	?>
+	<input name="dw_custom_google_map_settings[dw_custom_google_map_brightness]" type="number" min="-100" max="100" step="1" value="<?php echo intval( $val ); ?>" />
+	<p><em><small><?php _e( 'Set the brightness for the main color.', 'dw-custom-google-map' ); ?><small></em></p>
 	<?php
 }
 
@@ -82,6 +118,6 @@ function dw_custom_google_map_custom_marker_render() {
 		echo '<img src="'. $val .'" alt="" width="40">';
 	} ?>
 	
-	<p><em><small><?php _e( 'Upload a custom map marker. Min <strong>50px</strong> and max <strong>200px</strong>.', 'dw-custom-google-map' ); ?><small></em></p>
+	<p><em><small><?php _e( 'Select a custom marker. Min <strong>50px</strong> and max <strong>200px</strong>.', 'dw-custom-google-map' ); ?><small></em></p>
 	<?php
 }

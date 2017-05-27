@@ -69,15 +69,15 @@ function dw_custom_google_map_shortcode() {
 	$options = get_option( 'dw_custom_google_map_settings' );
 
 	$activate_address = $options['dw_custom_google_map_activate_address'];
-	$address          = $options['dw_custom_google_map_address'];
+	$address          = esc_textarea( $options['dw_custom_google_map_address'] );
 
 	$latitude      = wp_strip_all_tags( $options['dw_custom_google_map_latitude'] );
 	$longitude     = wp_strip_all_tags( $options['dw_custom_google_map_longitude'] );
-	$map_zoom      = 16;
+	$map_zoom      = intval( $options['dw_custom_google_map_zoom'] );
 	$custom_marker = esc_url( $options['dw_custom_google_map_custom_marker'] );
 	$main_color    = esc_html( $options['dw_custom_google_map_main_color'] );
-	$saturation    = 0;
-	$brightness    = 0;
+	$saturation    = intval( $options['dw_custom_google_map_saturation'] );
+	$brightness    = intval( $options['dw_custom_google_map_brightness'] );
 
 	echo '<section id="dw-custom-google-map" class="dw-custom-google-map" data-latitude="'. $latitude .'" data-longitude="'. $longitude .'" data-zoom="'. $map_zoom .'" data-custom-marker="'. $custom_marker .'" data-main-color="'. $main_color .'" data-saturation="'. $saturation .'" data-brightness="'. $brightness .'">';
 

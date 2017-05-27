@@ -5,7 +5,7 @@ Plugin criado para dar a possibilidade de usuários comuns poderem criar um mapa
 ---
 
 #### Overview
-* Campos para latitude e longitude inseridos no admin.
+* Campos para latitude e longitude, saturação, brilho e nivel de zoom inseridos no admin.
 
 #### To Do
 * Criar uma imagem para por ao lado das opções.
