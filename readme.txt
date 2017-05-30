@@ -21,7 +21,7 @@ Extract the zip file and just drop the contents in the **wp-content/plugins/** d
 
 == Screenshots ==
 
-1. Customized Google Maps demonstration maps.
+1. Customized Google Maps demonstration examples.
 
 == Changelog ==
 

@@ -5,7 +5,7 @@ Plugin criado para dar a possibilidade de usuários comuns poderem criar um mapa
 ---
 
 #### Overview
-* 29.05.2017 - Clique duplo no marker agora aumenta um nivel de zoom.
+* 29.05.2017 - Clique duplo no marker agora aumenta um nivel de zoom. Tutorial de como usar inserido no admin.
 * Campos para latitude e longitude, saturação, brilho e nivel de zoom inseridos no admin.
 
 #### To Do

@@ -40,7 +40,7 @@ add_action( 'admin_menu', 'dw_custom_google_map_menu' );
 function dw_custom_google_map_settings_link( $links, $file ) {
  
     if ( $file == 'dw-custom-google-map/dw-custom-google-map.php' ) {
-        $links['settings'] = sprintf( '<a href="%s"> %s </a>', admin_url( 'admin.php?page=dw-custom-google-map-settings' ), __( 'Settings' ) );
+        $links['settings'] = sprintf( '<a href="%s"> %s </a>', admin_url( 'admin.php?page=dw-custom-google-map-settings' ), __( 'Settings', 'dw-custom-google-map' ) );
     }
     return $links;
  
@@ -65,6 +65,21 @@ function dw_custom_google_map_settings_page() {
 			?>
 
 			</form>
+		</div>
+		<div class="card right">
+			<div>
+				<h2><?php _e( 'How to configure and use the custom map', 'dw-custom-google-map' ); ?></h2>
+				<p><?php _e( 'The only required fields are the latitude and longitude.', 'dw-custom-google-map' ); ?></p>
+				<ol class="howto">
+					<li><?php _e( 'Open <a href="https://www.google.com.br/maps/" target="_blank">Google Maps</a> and enter your address', 'dw-custom-google-map' ); ?></li>
+					<li><?php _e( "Right click on the marker and click on <strong>What's here</strong>.", "dw-custom-google-map" ); ?></li>
+					<li><?php _e( 'A box is opened and here are the latitude and longitude, respectively. Copy or click on it.' ); ?>
+						<img src="<?php echo plugin_dir_url( __FILE__ ); ?>images/lat-long.png" alt="print">
+					</li>
+					<li><?php _e( 'Paste latitude and longitude into the indicated fields and save.', 'dw-custom-google-map' ); ?></li>
+				</ol>
+				<p><?php _e( 'Use the shortcode <code>[dw-custom-google-map]</code> to call the map.', 'dw-custom-google-map' ); ?></p>
+			</div>
 		</div>
 	</div>
 

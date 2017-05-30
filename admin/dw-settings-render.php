@@ -7,7 +7,6 @@ if ( ! defined( 'WPINC' ) ) {
 function dw_custom_google_map_settings_section_callback() { 
 	// Display the options section description
 	echo __( 'Configure the display options of the Custom Google Map.', 'dw-custom-google-map' );
-
 }
 
 // Map latitude setting render

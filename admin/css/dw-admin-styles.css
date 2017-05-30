@@ -1,8 +1,20 @@
 /**
  * The plugin admin styles.
  */
+img {
+	margin-top: 5px;
+	max-width: 100%;
+}
 .dw-custom-google-map-settings-page .card {
-	max-width: 600px;
+	box-sizing: border-box;
+	max-width: none;
+}
+.card.left {
+	margin-right: 2%;
+	width: 59%;
+}
+.card.right {
+	width: 39%;
 }
 
 .option-custom-marker img {
@@ -14,4 +26,11 @@
 .option-custom-css textarea {
 	font-family: consolas, "courier new", sans-serif;
 	font-size: 12px;
+}
+
+.left {
+	float: left;
+}
+.right {
+	float: right;
 }
