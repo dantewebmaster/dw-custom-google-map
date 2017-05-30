@@ -5,9 +5,11 @@ Plugin criado para dar a possibilidade de usuários comuns poderem criar um mapa
 ---
 
 #### Overview
+* 29.05.2017 - Clique duplo no marker agora aumenta um nivel de zoom.
 * Campos para latitude e longitude, saturação, brilho e nivel de zoom inseridos no admin.
 
 #### To Do
+* TWEAK: Abrir google maps ou infowindow ao clicar no marker.
 * Criar uma imagem para por ao lado das opções.
 * Criar 2 screeshots.
 * Organizar e splitar o código.

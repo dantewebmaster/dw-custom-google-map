@@ -222,6 +222,15 @@ jQuery(document).ready(function ($) {
 		}
 	}
 	marker.addListener('click', toggleBounce);
+	marker.addListener('dblclick', mapZoomIn);
+
+	/* map zoom in and out function */
+	function mapZoomIn() {
+		map.setZoom(map.getZoom() + 1);
+	}
+	function mapZoomOut() {
+		map.setZoom(map.getZoom() - 1);
+	}
 
 	/* add custom buttons for the zoom-in/zoom-out on the map */
 	function CustomZoomControl(controlDiv, map) {
@@ -233,12 +242,8 @@ jQuery(document).ready(function ($) {
 	  	controlDiv.appendChild(controlUIzoomOut);
 
 		/* Set the click event listeners and zoom-in or out according to the clicked element */
-		google.maps.event.addDomListener(controlUIzoomIn, 'click', function() {
-		    map.setZoom(map.getZoom() +1 )
-		});
-		google.maps.event.addDomListener(controlUIzoomOut, 'click', function() {
-		    map.setZoom(map.getZoom() -1 )
-		});
+		google.maps.event.addDomListener(controlUIzoomIn, 'click', mapZoomIn);
+		google.maps.event.addDomListener(controlUIzoomOut, 'click', mapZoomOut);
 	}
 	var zoomControlDiv = document.createElement('div');
  	var zoomControl = new CustomZoomControl(zoomControlDiv, map);
