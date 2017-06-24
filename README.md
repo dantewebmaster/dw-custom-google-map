@@ -9,10 +9,9 @@ Plugin criado para dar a possibilidade de usuários comuns poderem criar um mapa
 * Campos para latitude e longitude, saturação, brilho e nivel de zoom inseridos no admin.
 
 #### To Do
-* ! BUG: Função que valida dimensões da imagem está dando erro mesmo com imagem com dimensões corretas.
 * TWEAK: Abrir google maps ou infowindow ao clicar no marker.
 * Criar uma imagem para por ao lado das opções.
-* Criar 2 screeshots.
+* Criar 2 screeshots. 1 ta pronto.
 * Organizar e splitar o código.
 * Revisar todo o texto do plugin e revisar se está pronto para tradução.
 * Refazer o código usando OOP.
