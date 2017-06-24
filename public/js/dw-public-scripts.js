@@ -210,9 +210,7 @@ jQuery(document).ready(function ($) {
 	    map: map,
 	    visible: true,
 		icon: $marker_url,
-		animation: google.maps.Animation.DROP, 
-		width: 30,
-		height: 30,
+		animation: google.maps.Animation.DROP,
 	});
 
 	/* play bounce animation on marker click */ 
