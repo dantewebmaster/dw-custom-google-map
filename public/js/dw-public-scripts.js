@@ -211,6 +211,8 @@ jQuery(document).ready(function ($) {
 	    visible: true,
 		icon: $marker_url,
 		animation: google.maps.Animation.DROP, 
+		width: 30,
+		height: 30,
 	});
 
 	/* play bounce animation on marker click */ 
